@@ -1,5 +1,5 @@
 FROM --platform=$TARGETOS/$TARGETARCH debian:buster-slim
-FROM node:18-buster-slim
+FROM ghcr.io/parkervcp/yolks:nodejs_18
 
 LABEL author="Zastinian" maintainer="contact@mresmile.com"
 
