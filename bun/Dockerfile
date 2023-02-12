@@ -1,3 +1,5 @@
+FROM debian:buster-slim
+
 LABEL author="Zastinian" maintainer="contact@mresmile.com"
 
 RUN  apt update \
