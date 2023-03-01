@@ -3,8 +3,8 @@ FROM debian:buster-slim
 LABEL author="Zastinian" maintainer="contact@mresmile.com"
 
 RUN apt update \ 
-            && apt install -y curl ca-certificates \
-            && apt install php8 php8-fpm php8-mcrypt php8-soap php8-openssl php8-session php8-exif php8-gmp php8-pdo_odbc php8-json php8-dom php8-pdo php8-zip php8-mysqli php8-sqlite3 php8-apcu php8-pdo_pgsql php8-bcmath php8-gd php8-odbc php8-pdo_mysql php8-pdo_sqlite php8-gettext php8-xml php8-simplexml php8-xmlwriter php8-xmlreader php8-xmlrpc php8-bz2 php8-iconv php8-pdo_dblib php8-curl php8-ctype php8-phar php8-fileinfo php8-mbstring php8-tokenizer php8-intl php8-posix php8-opcache php8-pecl-imagick
+            && apt -y install curl ca-certificates \
+            && apt -y install php8.2 php8.2-{fpm,mcrypt,soap,openssl,session,exif,gmp,pdo_odbc,json,dom,pdo,zip,mysqli,sqlite3,apcu,pdo_pgsql,bcmath,gd,odbc,pdo_mysql,pdo_sqlite,gettext,xml,simplexml,xmlwriter,xmlreader,xmlrpc,bz2,iconv,pdo_dblib,curl,ctype,phar,fileinfo,mbstring,tokenizer,intl,posix,opcache,pecl-imagick}
 
 USER container
 ENV  USER container
