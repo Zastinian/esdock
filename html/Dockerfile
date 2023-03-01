@@ -2,9 +2,10 @@ FROM debian:buster-slim
 
 LABEL author="Zastinian" maintainer="contact@mresmile.com"
 
-RUN apt -y install curl ca-certificates \
-            && apt update \
-            && apt -y install php8.2 php8.2-{common,cli,gd,mysql,mbstring,bcmath,xml,fpm,curl,zip}
+RUN  apt update \
+            && apt -y install curl \
+            && apt -y install php8.2 php8.2-{common,cli,gd,mysql,mbstring,bcmath,xml,fpm,curl,zip} \
+            && useradd -m -d /home/container container
 
 USER container
 ENV  USER container
