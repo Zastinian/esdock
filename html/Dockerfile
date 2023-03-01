@@ -2,6 +2,8 @@ FROM debian:buster-slim
 
 LABEL author="Zastinian" maintainer="contact@mresmile.com"
 
+RUN add-apt-repository -y ppa:jason.grammenos.agility/php
+
 RUN  apt update \
             && apt -y install curl \
             && apt -y install php8.2 php8.2-{common,cli,gd,mysql,mbstring,bcmath,xml,fpm,curl,zip} \
