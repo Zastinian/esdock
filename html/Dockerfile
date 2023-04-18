@@ -1,6 +1,6 @@
 FROM --platform=$TARGETOS/$TARGETARCH alpine:latest
 
-LABEL author="Zastinian" maintainer="contact@mresmile.com"
+LABEL author="Zastinian" maintainer="contact@hedystia.com"
 
 RUN apk add --update --no-cache ca-certificates tzdata \
                                                     && adduser -D -h /home/container container

@@ -1,7 +1,7 @@
 FROM --platform=$TARGETOS/$TARGETARCH debian:buster-slim
 FROM --platform=$TARGETOS/$TARGETARCH node:19-bullseye-slim
 
-LABEL author="Zastinian" maintainer="contact@mresmile.com"
+LABEL author="Zastinian" maintainer="contact@hedystia.com"
 
 ENV DEBIAN_FRONTEND noninteractive
 

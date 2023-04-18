@@ -1,6 +1,6 @@
 FROM --platform=$TARGETOS/$TARGETARCH node:19-bullseye-slim
 
-LABEL author="Zastinian" maintainer="contact@mresmile.com"
+LABEL author="Zastinian" maintainer="contact@hedystia.com"
 
 RUN  apt update \
             && apt -y install ffmpeg iproute2 git sqlite3 libsqlite3-dev python3 python3-dev ca-certificates dnsutils tzdata zip tar curl build-essential libtool \
