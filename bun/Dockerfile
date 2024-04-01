@@ -1,5 +1,5 @@
-FROM debian:buster-slim
-FROM oven/bun
+FROM alpine:latest
+FROM oven/bun:latest
 
 LABEL author="Zastinian" maintainer="contact@hedystia.com"
 
