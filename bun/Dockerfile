@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM --platform=$TARGETOS/$TARGETARCH debian:buster-slim
 FROM oven/bun:latest
 
 LABEL author="Zastinian" maintainer="contact@hedystia.com"
