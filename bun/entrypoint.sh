@@ -1,15 +1,15 @@
 #!/bin/bash
 cd /home/container
 
-# Make internal Docker IP address available to processes.
-export INTERNAL_IP=`ip route get 1 | awk '{print $NF;exit}'`
+# Retrieves the internal IP address and exports it for further use.
+export INTERNAL_IP=$(ip route get 1 | awk '{print $NF;exit}')
 
-# Print Bun Version
+# Displays the currently installed Bun version.
 bun -v
 
-# Replace Startup Variables
+# Replaces placeholders in the startup command with actual values.
 MODIFIED_STARTUP=$(echo -e ${STARTUP} | sed -e 's/{{/${/g' -e 's/}}/}/g')
 echo -e ":/home/container$ ${MODIFIED_STARTUP}"
 
-# Run the Server
+# Executes the modified startup command.
 eval ${MODIFIED_STARTUP}
