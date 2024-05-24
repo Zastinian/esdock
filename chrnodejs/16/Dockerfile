@@ -1,4 +1,3 @@
-FROM --platform=$TARGETOS/$TARGETARCH debian:buster-slim
 FROM --platform=$TARGETOS/$TARGETARCH node:16-bullseye-slim
 
 LABEL author="Zastinian" maintainer="contact@hedystia.com"
