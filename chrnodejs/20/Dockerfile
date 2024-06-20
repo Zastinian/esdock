@@ -4,10 +4,10 @@ LABEL author="Zastinian" maintainer="contact@hedystia.com"
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && apt-get -y install wget gnupg2 apt-utils
+RUN apt-get update && apt-get -y install wget gnupg2 ca-certificates apt-utils
 
-RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /usr/share/keyrings/google-linux-signing-key.gpg \
-    && echo "deb [signed-by=/usr/share/keyrings/google-linux-signing-key.gpg arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
+RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /usr/share/keyrings/google-chrome-keyring.gpg \
+    && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome-keyring.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | tee /etc/apt/sources.list.d/google-chrome.list \
     && apt-get update && \
     apt-get install -y google-chrome-stable --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
