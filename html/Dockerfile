@@ -9,6 +9,5 @@ USER container
 ENV USER=container HOME=/home/container
 WORKDIR /home/container
 
-COPY --chown=container:container ./entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+COPY ./entrypoint.sh /entrypoint.sh
 CMD [ "/bin/ash", "/entrypoint.sh" ]
