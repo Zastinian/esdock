@@ -4,11 +4,13 @@ LABEL author="Zastinian" maintainer="contact@hedystia.com"
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update && apt-get -y install wget gnupg2 apt-utils \
-    wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
-    && apt-get install -y ./google-chrome-stable_current_amd64.deb \
-    && rm google-chrome-stable_current_amd64.deb \
-    && apt-get update \
+RUN apt-get update && apt-get -y install wget gnupg2 apt-utils
+
+RUN wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
+    && apt-get -y install ./google-chrome-stable_current_amd64.deb \
+    && rm google-chrome-stable_current_amd64.deb
+
+RUN apt-get update \
     && apt-get install -y --no-install-recommends \
     fonts-ipafont-gothic \
     fonts-wqy-zenhei \
@@ -23,15 +25,13 @@ RUN apt-get update && apt-get -y install wget gnupg2 apt-utils \
     tzdata \
     ca-certificates \
     dnsutils \
-    build-essential
-
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
+    build-essential \
     wget \
     net-tools \
     xvfb \
     pulseaudio \
-    apt-transport-https
+    apt-transport-https \
+    && apt-get clean
 
 USER container
 ENV USER=container HOME=/home/container
