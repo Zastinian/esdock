@@ -4,11 +4,13 @@ LABEL author="Zastinian" maintainer="contact@hedystia.com"
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update && apt-get -y install wget gnupg2 apt-utils
+RUN apt-get update && apt-get -y install wget gnupg2 apt-utils curl
 
-RUN wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
-    && apt-get -y install ./google-chrome-stable_current_amd64.deb \
-    && rm google-chrome-stable_current_amd64.deb
+RUN curl -fsSL https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    && echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
+    && apt-get update \
+    && apt-get install -y google-chrome-stable \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
