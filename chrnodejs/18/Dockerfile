@@ -2,40 +2,16 @@ FROM --platform=$TARGETOS/$TARGETARCH node:18-bullseye-slim
 
 LABEL author="Zastinian" maintainer="contact@hedystia.com"
 
-ENV DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update && apt-get -y install wget gnupg2 ca-certificates apt-utils curl
-
+RUN apt-get update && apt-get -f install && apt-get -y install wget gnupg2 apt-utils
+RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
+RUN echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' >> /etc/apt/sources.list
 RUN apt-get update \
-    && curl -fSsL https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor | tee /usr/share/keyrings/google-chrome.gpg >> /dev/null \
-    && echo deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main | tee /etc/apt/sources.list.d/google-chrome.list \
-    && apt-get update -qqy \
-    && apt-get -qqy install google-chrome-stable \
-    && rm /etc/apt/sources.list.d/google-chrome.list \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
+&& apt-get install -y google-chrome-stable --no-install-recommends --allow-downgrades fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf ffmpeg iproute2 git sqlite3 python3 tzdata ca-certificates dnsutils build-essential
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-    fonts-ipafont-gothic \
-    fonts-wqy-zenhei \
-    fonts-thai-tlwg \
-    fonts-kacst \
-    fonts-freefont-ttf \
-    ffmpeg \
-    iproute2 \
-    git \
-    sqlite3 \
-    python3 \
-    tzdata \
-    dnsutils \
-    build-essential \
-    net-tools \
-    xvfb \
-    pulseaudio \
-    apt-transport-https \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt update
+RUN apt install -y wget net-tools iproute2 gnupg2 xvfb pulseaudio apt-transport-https
 
 USER container
 ENV USER=container HOME=/home/container
