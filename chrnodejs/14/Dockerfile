@@ -5,8 +5,8 @@ LABEL author="Zastinian" maintainer="contact@hedystia.com"
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get -y install wget gnupg2 apt-utils \
-    && wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor -o /usr/share/keyrings/google-linux-keyring.gpg \
-    && echo 'deb [signed-by=/usr/share/keyrings/google-linux-keyring.gpg] http://dl.google.com/linux/chrome/deb/ stable main' > /etc/apt/sources.list.d/google.list \
+    wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
     google-chrome-stable \
