@@ -7,7 +7,7 @@ on:
     branches:
       - master
     paths:
-      - bun/**
+      - bun/*
 jobs:
   push:
     name: "esdock:bun"
