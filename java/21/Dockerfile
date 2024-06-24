@@ -1,4 +1,4 @@
-FROM --platform=$TARGETOS/$TARGETARCH openjdk:21-slim-bullseye
+FROM --platform=$TARGETOS/$TARGETARCH eclipse-temurin:21-jdk-jammy
 
 LABEL author="Zastinian" maintainer="contact@hedystia.com"
 

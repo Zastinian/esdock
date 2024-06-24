@@ -1,4 +1,4 @@
-FROM --platform=$TARGETOS/$TARGETARCH openjdk:16-slim-bullseye
+FROM --platform=$TARGETOS/$TARGETARCH eclipse-temurin:16-jdk-focal
 
 LABEL author="Zastinian" maintainer="contact@hedystia.com"
 
