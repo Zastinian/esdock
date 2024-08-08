@@ -1,4 +1,4 @@
-FROM --platform=$TARGETOS/$TARGETARCH oven/bun:latest
+FROM --platform=$TARGETOS/$TARGETARCH oven/bun:slim
 
 LABEL author="Zastinian" maintainer="contact@hedystia.com"
 
