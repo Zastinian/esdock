@@ -22,6 +22,9 @@ jobs:
           - 20
           - 21
           - 22
+        platforms:
+          - linux/amd64
+          - linux/arm64
 
     steps:
       - uses: actions/checkout@v4
@@ -42,16 +45,11 @@ jobs:
           platforms: ${{ matrix.platforms }}
           push: true
           tags: ghcr.io/zastinian/esdock:java_${{ matrix.tag }}
-        strategy:
-          matrix:
-            platforms:
-              - linux/amd64
-              - linux/arm64
       - if: matrix.tag >= 21
         uses: docker/build-push-action@v5
         with:
           context: ./java
           file: ./java/${{ matrix.tag }}/Dockerfile
-          platforms: linux/amd64,linux/arm64
+          platforms: ${{ matrix.platforms }}
           push: true
           tags: ghcr.io/zastinian/esdock:java_${{ matrix.tag }}
