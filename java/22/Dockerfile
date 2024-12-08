@@ -1,4 +1,4 @@
-FROM --platform=$TARGETOS/$TARGETARCH eclipse-temurin:22-jdk-jammy
+FROM --platform=$TARGETOS/$TARGETARCH eclipse-temurin:22-jdk-alpine
 
 LABEL author="Zastinian" maintainer="contact@hedystia.com"
 
