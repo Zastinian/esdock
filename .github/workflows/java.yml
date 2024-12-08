@@ -6,7 +6,6 @@ on:
       - master
     paths:
       - java/**
-
 jobs:
   push:
     name: "esdock:java_${{ matrix.tag }}"
@@ -22,10 +21,6 @@ jobs:
           - 20
           - 21
           - 22
-        platforms:
-          - linux/amd64
-          - linux/arm64
-
     steps:
       - uses: actions/checkout@v4
       - uses: docker/setup-qemu-action@v3
@@ -37,19 +32,11 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.REGISTRY_TOKEN }}
-      - if: matrix.tag >= 16 && matrix.tag <= 20
-        uses: docker/build-push-action@v5
-        with:
-          context: ./java
-          file: ${{ contains(matrix.platforms, 'arm64') && './java/arm/' || './java/amd/' }}${{ matrix.tag }}/Dockerfile
-          platforms: ${{ matrix.platforms }}
-          push: true
-          tags: ghcr.io/zastinian/esdock:java_${{ matrix.tag }}
-      - if: matrix.tag >= 21
-        uses: docker/build-push-action@v5
+      - uses: docker/build-push-action@v5
         with:
           context: ./java
           file: ./java/${{ matrix.tag }}/Dockerfile
-          platforms: ${{ matrix.platforms }}
+          platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/zastinian/esdock:java_${{ matrix.tag }}
+          tags: |
+            ghcr.io/zastinian/esdock:java_${{ matrix.tag }}
