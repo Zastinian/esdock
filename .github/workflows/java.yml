@@ -34,23 +34,26 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.REGISTRY_TOKEN }}
-      - uses: docker/build-push-action@v5
+      - if: matrix.tag >= 16 && matrix.tag <= 20
+        uses: docker/build-push-action@v5
         with:
           context: ./java
           file: ./java/amd/${{ matrix.tag }}/Dockerfile
           platforms: linux/amd64
           push: true
           tags: |
-            ghcr.io/zastinian/esdock:java_${{ matrix.tag }}
-      - uses: docker/build-push-action@v5
+            ghcr.io/zastinian/esdock:java_${{ matrix.tag }}_amd
+      - if: matrix.tag >= 16 && matrix.tag <= 20
+        uses: docker/build-push-action@v5
         with:
           context: ./java
           file: ./java/arm/${{ matrix.tag }}/Dockerfile
           platforms: linux/arm64
           push: true
           tags: |
-            ghcr.io/zastinian/esdock:java_${{ matrix.tag }}
-      - uses: docker/build-push-action@v5
+            ghcr.io/zastinian/esdock:java_${{ matrix.tag }}_arm
+      - if: matrix.tag >= 21
+        uses: docker/build-push-action@v5
         with:
           context: ./java
           file: ./java/${{ matrix.tag }}/Dockerfile
