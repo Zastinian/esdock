@@ -1,10 +1,17 @@
-FROM --platform=$TARGETOS/$TARGETARCH eclipse-temurin:20-jdk-alpine
+ARG BASE_IMAGE=alpine
+
+FROM --platform=$TARGETOS/$TARGETARCH eclipse-temurin:20-jdk-${BASE_IMAGE}
 
 LABEL author="Zastinian" maintainer="contact@hedystia.com"
 
-RUN apk update && apk add --no-cache \
-    curl lsof ca-certificates openssl git tar sqlite fontconfig tzdata iproute2 freetype zip unzip \
-    && adduser -D -h /home/container container
+RUN if [ "$BASE_IMAGE" = "alpine" ]; then \
+        apk update && apk add --no-cache \
+        curl lsof ca-certificates openssl git tar sqlite fontconfig tzdata iproute2 freetype zip unzip; \
+    else \
+        apt update && apt install -y \
+        curl lsof ca-certificates openssl git tar sqlite3 fontconfig tzdata iproute2 libfreetype6 zip unzip; \
+    fi \
+    && adduser -D -h /home/container container || useradd -m -d /home/container container
 
 USER container
 ENV USER=container HOME=/home/container
