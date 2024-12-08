@@ -34,14 +34,26 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.REGISTRY_TOKEN }}
-        
-      - name: Build and Push Docker Image
-        uses: docker/build-push-action@v5
+      - uses: docker/build-push-action@v5
         with:
           context: ./java
-          # Elige la carpeta correcta según el rango del tag
-          file: |
-            ${{ matrix.tag >= 16 && matrix.tag <= 20 && 'amd' || matrix.tag >= 21 && matrix.tag }}
+          file: ./java/amd/${{ matrix.tag }}/Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: |
+            ghcr.io/zastinian/esdock:java_${{ matrix.tag }}
+      - uses: docker/build-push-action@v5
+        with:
+          context: ./java
+          file: ./java/arm/${{ matrix.tag }}/Dockerfile
+          platforms: linux/arm64
+          push: true
+          tags: |
+            ghcr.io/zastinian/esdock:java_${{ matrix.tag }}
+      - uses: docker/build-push-action@v5
+        with:
+          context: ./java
+          file: ./java/${{ matrix.tag }}/Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
