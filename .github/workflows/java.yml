@@ -42,7 +42,7 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ghcr.io/zastinian/esdock:java_${{ matrix.tag }}_amd
+            ghcr.io/zastinian/esdock:java_${{ matrix.tag }}
       - if: matrix.tag >= 16 && matrix.tag <= 20
         uses: docker/build-push-action@v5
         with:
@@ -51,7 +51,7 @@ jobs:
           platforms: linux/arm64
           push: true
           tags: |
-            ghcr.io/zastinian/esdock:java_${{ matrix.tag }}_arm
+            ghcr.io/zastinian/esdock:java_${{ matrix.tag }}
       - if: matrix.tag >= 21
         uses: docker/build-push-action@v5
         with:
