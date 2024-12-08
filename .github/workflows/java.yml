@@ -38,8 +38,14 @@ jobs:
       - name: Determine Base Image
         id: base-image
         run: |
-          if [[ "${{ matrix.platform }}" == "linux/arm64" && ${{ matrix.tag }} -ge 16 && ${{ matrix.tag }} -le 20 ]]; then
-            echo "BASE_IMAGE=jammy" >> $GITHUB_ENV
+          if [[ "${{ matrix.platform }}" == "linux/arm64" ]]; then
+            if [[ ${{ matrix.tag }} -eq 16 ]]; then
+              echo "BASE_IMAGE=focal" >> $GITHUB_ENV
+            elif [[ ${{ matrix.tag }} -ge 17 && ${{ matrix.tag }} -le 20 ]]; then
+              echo "BASE_IMAGE=jammy" >> $GITHUB_ENV
+            else
+              echo "BASE_IMAGE=alpine" >> $GITHUB_ENV
+            fi
           else
             echo "BASE_IMAGE=alpine" >> $GITHUB_ENV
           fi
