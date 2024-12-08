@@ -6,6 +6,7 @@ on:
       - master
     paths:
       - java/**
+
 jobs:
   push:
     name: "esdock:java_${{ matrix.tag }}"
@@ -21,9 +22,7 @@ jobs:
           - 20
           - 21
           - 22
-        platform:
-          - linux/amd64
-          - linux/arm64
+
     steps:
       - uses: actions/checkout@v4
       - uses: docker/setup-qemu-action@v3
@@ -35,27 +34,15 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.REGISTRY_TOKEN }}
-      - name: Determine Base Image
-        id: base-image
-        run: |
-          if [[ "${{ matrix.platform }}" == "linux/arm64" ]]; then
-            if [[ ${{ matrix.tag }} -eq 16 ]]; then
-              echo "BASE_IMAGE=focal" >> $GITHUB_ENV
-            elif [[ ${{ matrix.tag }} -ge 17 && ${{ matrix.tag }} -le 20 ]]; then
-              echo "BASE_IMAGE=jammy" >> $GITHUB_ENV
-            else
-              echo "BASE_IMAGE=alpine" >> $GITHUB_ENV
-            fi
-          else
-            echo "BASE_IMAGE=alpine" >> $GITHUB_ENV
-          fi
-      - uses: docker/build-push-action@v5
+        
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v5
         with:
           context: ./java
-          file: ./java/${{ matrix.tag }}/Dockerfile
-          platforms: ${{ matrix.platform }}
+          # Elige la carpeta correcta según el rango del tag
+          file: |
+            ${{ matrix.tag >= 16 && matrix.tag <= 20 && 'amd' || matrix.tag >= 21 && matrix.tag }}
+          platforms: linux/amd64,linux/arm64
           push: true
-          build-args: |
-            BASE_IMAGE=${{ env.BASE_IMAGE }}
           tags: |
             ghcr.io/zastinian/esdock:java_${{ matrix.tag }}
