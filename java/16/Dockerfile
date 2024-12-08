@@ -22,5 +22,5 @@ WORKDIR /home/container
 
 STOPSIGNAL SIGINT
 
-COPY ./../../entrypoint.sh /entrypoint.sh
-CMD [ "/bin/sh", "/entrypoint.sh" ]
+COPY ./../entrypoint.sh /entrypoint.sh
+CMD [ "/bin/ash", "/entrypoint.sh" ]
