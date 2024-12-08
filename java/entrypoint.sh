@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/ash
 # Default the TZ environment variable to UTC.
 export TZ=${TZ:-UTC}
 

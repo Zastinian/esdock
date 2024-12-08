@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/ash
 cd /home/container
 
 # Retrieves the internal IP address and exports it for further use.
