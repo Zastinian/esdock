@@ -38,20 +38,15 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./java
-          file: ./java/amd/${{ matrix.tag }}/Dockerfile
-          platforms: linux/amd64
+          file: ${{ contains(matrix.platforms, 'arm64') && './java/arm/' || './java/amd/' }}${{ matrix.tag }}/Dockerfile
+          platforms: ${{ matrix.platforms }}
           push: true
-          tags: |
-            ghcr.io/zastinian/esdock:java_${{ matrix.tag }}
-      - if: matrix.tag >= 16 && matrix.tag <= 20
-        uses: docker/build-push-action@v5
-        with:
-          context: ./java
-          file: ./java/arm/${{ matrix.tag }}/Dockerfile
-          platforms: linux/arm64
-          push: true
-          tags: |
-            ghcr.io/zastinian/esdock:java_${{ matrix.tag }}
+          tags: ghcr.io/zastinian/esdock:java_${{ matrix.tag }}
+        strategy:
+          matrix:
+            platforms:
+              - linux/amd64
+              - linux/arm64
       - if: matrix.tag >= 21
         uses: docker/build-push-action@v5
         with:
@@ -59,5 +54,4 @@ jobs:
           file: ./java/${{ matrix.tag }}/Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: |
-            ghcr.io/zastinian/esdock:java_${{ matrix.tag }}
+          tags: ghcr.io/zastinian/esdock:java_${{ matrix.tag }}
