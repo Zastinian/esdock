@@ -43,6 +43,8 @@ jobs:
               echo "BASE_IMAGE=focal" >> $GITHUB_ENV
             elif [[ ${{ matrix.tag }} -ge 17 && ${{ matrix.tag }} -le 20 ]]; then
               echo "BASE_IMAGE=jammy" >> $GITHUB_ENV
+            else
+              echo "BASE_IMAGE=alpine" >> $GITHUB_ENV
             fi
           fi
       - uses: docker/build-push-action@v5
