@@ -46,6 +46,8 @@ jobs:
             else
               echo "BASE_IMAGE=alpine" >> $GITHUB_ENV
             fi
+          else
+            echo "BASE_IMAGE=alpine" >> $GITHUB_ENV
           fi
       - uses: docker/build-push-action@v5
         with:
