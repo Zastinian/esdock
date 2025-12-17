@@ -10,10 +10,6 @@ matrix:
 when:
   - event: push
     branch: master
-    path: "nodejs/**"
-
-labels:
-  platform: linux/amd64
 
 steps:
   build-push:

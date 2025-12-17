@@ -10,10 +10,6 @@ matrix:
 when:
   - event: push
     branch: master
-    path: "chrnodejs/**"
-
-labels:
-  platform: linux/amd64
 
 steps:
   build-push:
