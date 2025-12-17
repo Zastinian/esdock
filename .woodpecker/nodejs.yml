@@ -6,6 +6,7 @@ matrix:
     - 18
     - 20
     - 22
+    - 24
 
 when:
   - event: push
