@@ -7,7 +7,7 @@ when:
     path: { include: [ "nodejs/**" ] }
 
 steps:
-  publish-nodejs:
+  - name: publish-nodejs
     image: woodpeckerci/plugin-docker
     settings:
       registry: ghcr.io

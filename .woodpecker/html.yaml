@@ -4,7 +4,7 @@ when:
     path: { include: [ "html/*" ] }
 
 steps:
-  publish-html:
+  - name: publish-html
     image: woodpeckerci/plugin-docker
     settings:
       registry: ghcr.io

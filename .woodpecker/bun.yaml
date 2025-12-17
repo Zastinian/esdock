@@ -4,7 +4,7 @@ when:
     path: { include: [ "bun/*" ] }
 
 steps:
-  publish-bun:
+  - name: publish-bun
     image: woodpeckerci/plugin-docker
     settings:
       registry: ghcr.io
