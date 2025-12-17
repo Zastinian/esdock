@@ -2,9 +2,6 @@ when:
   - event: push
     branch: master
 
-labels:
-  platform: linux/amd64
-
 steps:
   build-push:
     image: woodpeckerci/plugin-docker-buildx
