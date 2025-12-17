@@ -1,21 +1,30 @@
 matrix:
-  TAG: [12, 14, 16, 18, 20, 22]
+  TAG_VERSION:
+    - 12
+    - 14
+    - 16
+    - 18
+    - 20
+    - 22
 
 when:
   - event: push
     branch: master
-    path: { include: [ "chrnodejs/**" ] }
+    path: "chrnodejs/**"
+
+labels:
+  platform: linux/amd64
 
 steps:
-  - name: publish-chrnodejs
-    image: woodpeckerci/plugin-docker
+  build-push:
+    image: woodpeckerci/plugin-docker-buildx
     settings:
       registry: ghcr.io
       repo: ghcr.io/${CI_REPO_OWNER}/esdock
+      tags: chrnodejs_${TAG_VERSION}
+      dockerfile: chrnodejs/${TAG_VERSION}/Dockerfile
+      context: chrnodejs
+      platforms: linux/amd64
       username: ${CI_REPO_OWNER}
       password:
-        from_secret: REGISTRY_TOKEN
-      context: chrnodejs
-      dockerfile: chrnodejs/${TAG}/Dockerfile
-      tags: chrnodejs_${TAG}
-      platforms: linux/amd64
+        from_secret: registry_token

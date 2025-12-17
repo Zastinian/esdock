@@ -1,21 +1,31 @@
 matrix:
-  TAG: [16, 17, 18, 19, 20, 21, 22]
+  TAG_VERSION:
+    - 16
+    - 17
+    - 18
+    - 19
+    - 20
+    - 21
+    - 22
 
 when:
   - event: push
     branch: master
-    path: { include: [ "java/**" ] }
+    path: "java/**"
+
+labels:
+  platform: linux/amd64
 
 steps:
-  - name: publish-java
-    image: woodpeckerci/plugin-docker
+  build-push:
+    image: woodpeckerci/plugin-docker-buildx
     settings:
       registry: ghcr.io
       repo: ghcr.io/${CI_REPO_OWNER}/esdock
+      tags: java_${TAG_VERSION}
+      dockerfile: java/${TAG_VERSION}/Dockerfile
+      context: java
+      platforms: linux/amd64,linux/arm64
       username: ${CI_REPO_OWNER}
       password:
-        from_secret: REGISTRY_TOKEN
-      context: java
-      dockerfile: java/${TAG}/Dockerfile
-      tags: java_${TAG}
-      platforms: linux/amd64,linux/arm64
+        from_secret: registry_token
