@@ -2,11 +2,9 @@ FROM --platform=$TARGETOS/$TARGETARCH oven/bun:slim
 
 LABEL author="Zastinian" maintainer="contact@hedystia.com"
 
-ENV DEBIAN_FRONTEND=noninteractive \
-    APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN set -eux; \
-    sed -i 's|deb.debian.org|ftp.debian.org|g' /etc/apt/sources.list; \
     apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout=30 update; \
     apt-get install -y --no-install-recommends \
         ffmpeg \
