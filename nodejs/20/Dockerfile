@@ -5,7 +5,7 @@ LABEL author="Zastinian" maintainer="contact@hedystia.com"
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update \
-    && apt -y install ffmpeg python3 ca-certificates build-essential libvips \
+    && apt -y install ffmpeg python3 ca-certificates \
     && apt clean \
     && rm -rf /var/lib/apt/lists/* \
     && useradd -m -d /home/container container

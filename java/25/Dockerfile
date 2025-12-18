@@ -6,12 +6,10 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update \
     && apt install -y \
-        curl \
         ca-certificates \
         openssl \
         fontconfig \
         libfreetype6 \
-        sqlite3 \
     && apt clean \
     && rm -rf /var/lib/apt/lists/* \
     && useradd -m -d /home/container container
