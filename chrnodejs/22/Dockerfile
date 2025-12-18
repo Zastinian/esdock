@@ -15,6 +15,7 @@ RUN apt-get update \
         python3 \
         build-essential \
         libtool \
+        gnupg \
         fonts-ipafont-gothic \
         fonts-wqy-zenhei \
         fonts-thai-tlwg \
