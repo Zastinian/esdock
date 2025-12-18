@@ -11,15 +11,13 @@ jobs:
     strategy:
       fail-fast: false
     steps:
-      - uses: actions/checkout@v4
-      
-      - uses: redhat-actions/podman-login@v1
+      - uses: https://github.com/actions/checkout@v4
+      - uses: https://github.com/redhat-actions/podman-login@v1
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.REGISTRY_TOKEN }}
-
-      - uses: redhat-actions/buildah-build@v2
+      - uses: https://github.com/redhat-actions/buildah-build@v2
         with:
           image: esdock
           tags: html
