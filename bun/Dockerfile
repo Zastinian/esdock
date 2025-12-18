@@ -4,14 +4,8 @@ LABEL author="Zastinian" maintainer="contact@hedystia.com"
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        ca-certificates \
-        python3 \
-        tar \
-        curl \
-        xz-utils \
-        bash \
+RUN apt-get  update \
+    && apt-get install -y --no-install-recommends python3 ca-certificates build-essential libtool tar curl xz-utils bash \
     && rm -rf /var/lib/apt/lists/*
 
 RUN set -eux; \
@@ -28,10 +22,9 @@ RUN set -eux; \
     fi
 
 RUN useradd -m -d /home/container container
-
 USER container
 ENV USER=container HOME=/home/container
 WORKDIR /home/container
 
 COPY ./entrypoint.sh /entrypoint.sh
-CMD ["/bin/bash", "/entrypoint.sh"]
+CMD [ "/bin/bash", "/entrypoint.sh" ]
