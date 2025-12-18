@@ -1,6 +1,7 @@
 matrix:
   TAG_VERSION:
     - 8
+    - 11
     - 17
     - 21
     - 25
