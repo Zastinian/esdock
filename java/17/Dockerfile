@@ -2,6 +2,8 @@ FROM --platform=$TARGETOS/$TARGETARCH eclipse-temurin:17-jdk-jammy
 
 LABEL author="Zastinian" maintainer="contact@hedystia.com"
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt update \
         && apt install -y curl lsof ca-certificates openssl git tar sqlite3 fontconfig tzdata iproute2 libfreetype6 zip unzip \
         && useradd -m -d /home/container container
