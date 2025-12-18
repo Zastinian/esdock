@@ -2,7 +2,7 @@ FROM --platform=$TARGETOS/$TARGETARCH node:24-bullseye-slim
 
 LABEL author="Zastinian" maintainer="contact@hedystia.com"
 
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get -f install && apt-get -y install wget gnupg2 apt-utils
 RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
