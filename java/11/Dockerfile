@@ -5,8 +5,16 @@ LABEL author="Zastinian" maintainer="contact@hedystia.com"
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update \
-        && apt install -y curl lsof ca-certificates openssl git tar sqlite3 fontconfig tzdata iproute2 libfreetype6 zip unzip \
-        && useradd -m -d /home/container container
+    && apt install -y \
+        curl \
+        ca-certificates \
+        openssl \
+        fontconfig \
+        libfreetype6 \
+        sqlite3 \
+    && apt clean \
+    && rm -rf /var/lib/apt/lists/* \
+    && useradd -m -d /home/container container
 
 USER container
 ENV USER=container HOME=/home/container

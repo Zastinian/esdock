@@ -4,8 +4,10 @@ LABEL author="Zastinian" maintainer="contact@hedystia.com"
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN  apt update \
-    && apt -y install ffmpeg iproute2 git sqlite3 libsqlite3-dev python3 python3-dev ca-certificates dnsutils tzdata zip tar curl build-essential libtool \
+RUN apt update \
+    && apt -y install ffmpeg python3 ca-certificates build-essential libvips \
+    && apt clean \
+    && rm -rf /var/lib/apt/lists/* \
     && useradd -m -d /home/container container
 
 USER container

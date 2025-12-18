@@ -2,8 +2,9 @@ FROM --platform=$TARGETOS/$TARGETARCH alpine:latest
 
 LABEL author="Zastinian" maintainer="contact@hedystia.com"
 
-RUN apk add --update --no-cache ca-certificates tzdata \
-                                                    && adduser -D -h /home/container container
+RUN apk add --update --no-cache ca-certificates \
+    && rm -rf /var/cache/apk/* \
+    && adduser -D -h /home/container container
 
 USER container
 ENV USER=container HOME=/home/container
