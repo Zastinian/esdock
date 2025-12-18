@@ -2,17 +2,25 @@ FROM --platform=$TARGETOS/$TARGETARCH oven/bun:slim
 
 LABEL author="Zastinian" maintainer="contact@hedystia.com"
 
-ENV DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND=noninteractive \
+    APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1
 
-RUN apt update \
-    && apt -y install ffmpeg python3 ca-certificates build-essential libvips \
-    && apt clean \
-    && rm -rf /var/lib/apt/lists/* \
-    && useradd -m -d /home/container container
+RUN set -eux; \
+    sed -i 's|deb.debian.org|ftp.debian.org|g' /etc/apt/sources.list; \
+    apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout=30 update; \
+    apt-get install -y --no-install-recommends \
+        ffmpeg \
+        python3 \
+        ca-certificates \
+        build-essential \
+        libvips; \
+    apt-get clean; \
+    rm -rf /var/lib/apt/lists/*; \
+    useradd -m -d /home/container container
 
 USER container
 ENV USER=container HOME=/home/container
 WORKDIR /home/container
 
 COPY ./entrypoint.sh /entrypoint.sh
-CMD [ "/bin/bash", "/entrypoint.sh" ]
+CMD ["/bin/bash", "/entrypoint.sh"]
