@@ -11,11 +11,18 @@ RUN apt-get update \
         curl \
         tar \
         xz-utils \
+        apt-utils \
         bash \
         python3 \
         build-essential \
         libtool \
-        gnupg \
+        net-tools \
+        dnsutils \
+        xvfb \
+        iproute2 \
+        gnupg2 \
+        pulseaudio \
+        apt-transport-https \
         fonts-ipafont-gothic \
         fonts-wqy-zenhei \
         fonts-thai-tlwg \
