@@ -2,7 +2,7 @@ FROM --platform=$TARGETOS/$TARGETARCH alpine:latest
 
 LABEL author="Zastinian" maintainer="contact@hedystia.com"
 
-RUN apk add --update --no-cache ca-certificates \
+RUN apk add --update --no-cache ca-certificates git \
     && rm -rf /var/cache/apk/* \
     && adduser -D -h /home/container container
 

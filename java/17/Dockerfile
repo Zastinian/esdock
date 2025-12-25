@@ -10,6 +10,7 @@ RUN apt update \
         openssl \
         fontconfig \
         libfreetype6 \
+        git \
     && apt clean \
     && rm -rf /var/lib/apt/lists/* \
     && useradd -m -d /home/container container

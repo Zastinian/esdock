@@ -5,7 +5,7 @@ LABEL author="Zastinian" maintainer="contact@hedystia.com"
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get  update \
-    && apt-get install -y --no-install-recommends python3 ca-certificates build-essential libtool tar curl xz-utils bash \
+    && apt-get install -y --no-install-recommends python3 ca-certificates build-essential libtool tar curl xz-utils bash git \
     && rm -rf /var/lib/apt/lists/*
 
 RUN set -eux; \
