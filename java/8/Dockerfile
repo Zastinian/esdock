@@ -10,6 +10,7 @@ RUN apt update \
         openssl \
         fontconfig \
         libfreetype6 \
+        iproute2 \
         git \
     && apt clean \
     && rm -rf /var/lib/apt/lists/* \
