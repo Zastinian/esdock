@@ -29,12 +29,20 @@ RUN apt-get update \
         fonts-kacst \
         fonts-freefont-ttf \
         git \
-    && wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
-    && echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' \
-        > /etc/apt/sources.list.d/google-chrome.list \
-    && apt-get update \
-    && apt-get install -y --no-install-recommends \
-        google-chrome-stable \
+    && ARCH="$(dpkg --print-architecture)" \
+    && if [ "$ARCH" = "amd64" ]; then \
+        wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
+        && echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' \
+            > /etc/apt/sources.list.d/google-chrome.list \
+        && apt-get update \
+        && apt-get install -y --no-install-recommends google-chrome-stable \
+        && ln -sf /usr/bin/google-chrome-stable /usr/bin/chromium-browser; \
+    elif [ "$ARCH" = "arm64" ]; then \
+        apt-get install -y --no-install-recommends chromium \
+        && ln -sf /usr/bin/chromium /usr/bin/google-chrome-stable; \
+    else \
+        echo "Arquitectura no soportada: $ARCH"; exit 1; \
+    fi \
     && rm -rf /var/lib/apt/lists/*
 
 RUN set -eux; \
