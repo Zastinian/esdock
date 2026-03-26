@@ -36,4 +36,4 @@ jobs:
           tags: ghcr.io/zastinian/esdock:chrnodejs_${{ matrix.tag }}
           context: ./chrnodejs
           file: ./chrnodejs/${{ matrix.tag }}/Dockerfile
-          platforms: linux/amd64
+          platforms: linux/amd64,linux/arm64
