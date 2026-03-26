@@ -1,4 +1,4 @@
-FROM --platform=$TARGETOS/$TARGETARCH node:24-bullseye-slim
+FROM --platform=$TARGETOS/$TARGETARCH node:24-trixie-slim
 
 LABEL author="Zastinian" maintainer="contact@hedystia.com"
 
