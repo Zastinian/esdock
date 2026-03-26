@@ -5,7 +5,7 @@ LABEL author="Zastinian" maintainer="contact@hedystia.com"
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
+    && apt-get install -y --no-install-recommends --fix-missing \
         wget \
         ca-certificates \
         curl \
